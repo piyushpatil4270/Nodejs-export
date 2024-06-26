@@ -8,13 +8,14 @@ const requestHandler=(req,res)=>{
         fs.readFile("message.txt", "utf8", (err, data) => {
           if (err) {
            console.log("Error: "+err)
+           data="Error"
           }
     
           res.write("<html>");
           res.write("<head><title>Send Message</title></head>");
           res.write("<body>");
           res.write(
-            '<form action="/message" method="POST"><input  type="text"  /><button type="submit">Send</button></form>'
+            '<form action="/message" method="POST"><input name="message"  type="text"  /><button type="submit">Send</button></form>'
           );
           res.write(`<p>${data}</p>`);
           res.write("</body>");
@@ -30,7 +31,9 @@ const requestHandler=(req,res)=>{
         req.on("end", () => {
           const parsedmsg = Buffer.concat(body).toString();
           console.log(parsedmsg)
-          fs.writeFileSync("message.txt", parsedmsg.split('=')[1]);
+          const newmsg=parsedmsg.split('=')[1]
+          console.log("eljsljl "+newmsg)
+          fs.writeFileSync("message.txt",newmsg);
           res.statusCode = 302;
           res.setHeader("Location", "/");
           return res.end();
