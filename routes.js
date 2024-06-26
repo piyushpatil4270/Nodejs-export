@@ -31,7 +31,7 @@ const requestHandler=(req,res)=>{
         req.on("end", () => {
           const parsedmsg = Buffer.concat(body).toString();
           console.log(parsedmsg)
-          const newmsg=parsedmsg.split('=')[1]
+          const newmsg=parsedmsg.split('=')[0]
           console.log("eljsljl "+newmsg)
           fs.writeFileSync("message.txt",newmsg);
           res.statusCode = 302;
