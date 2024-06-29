@@ -1,7 +1,7 @@
 const http = require("http");
 const express = require("express");
 const bodyParser = require("body-parser");
-const path=require("path")
+const errorC=require("./controllers/error")
 
 const app = express();
 const server = http.createServer(app);
@@ -15,10 +15,7 @@ app.use("/admin",adminRouter)
 app.use("/contact",contactRouter)
 app.use("/success",responseRouter)
 
-app.use((req,res,next)=>{
-  
-  res.status(404).sendFile(path.join(__dirname,"views","error.html"))
-})
+app.use(errorC.errorController)
 
 
 
