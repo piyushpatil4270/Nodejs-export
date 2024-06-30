@@ -29,7 +29,7 @@ module.exports = class Product {
       
        
        console.log("This is item type "+items)
-        fs.writeFile(p,JSON.stringify(items,null,2),(err)=>{
+        fs.writeFile(p,JSON.stringify(items),(err)=>{
          if(err)console.log(err)
          else console.log("item added successfully")
         })
