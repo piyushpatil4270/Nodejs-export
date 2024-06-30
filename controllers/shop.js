@@ -1,19 +1,25 @@
 const path = require("path");
 const rootDir = require("../util/path");
-const Product = require('../models/product');
+const Product = require("../models/product");
 
 exports.shopController = (req, res, next) => {
-    Product.fetchAll((prod) => {
-        let productsHtml = "";
-        prod.forEach(product => {
-            productsHtml += `
-                <li>${product.title}</li>
-            `;
-        });
+  Product.fetchAll((prod) => {
+    let productsHtml = "";
+    prod.forEach((product) => {
+        productsHtml += `
+        <div class="productbox">
+            <li class="product">${product.title}</li>
+            <form action="/details/${product.id}" method="POST">
+                <button type="submit" class="prodbtn">Details</button>
+            </form>
+        </div>
+    `;
+    
+    });
 
-        console.log("Prod html " + productsHtml); // Debugging line to see the generated HTML
+   // console.log("Prod html " + productsHtml); // Debugging line to see the generated HTML
 
-        let html = `
+    let html = `
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -24,11 +30,29 @@ exports.shopController = (req, res, next) => {
                     body {
                         margin: 0;
                     }
+                    
+                    .product {
+
+                    margin:5px;
+                    padding:5px;
+                    }
                     nav {
                         background-color: yellowgreen;
                         margin: 0;
                         top: 0;
                         width: 100%;
+                    }
+                    .productbox{
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:center
+                    }
+                    .prodbtn{
+                    border:none;
+                    backgroundColor:green;
+                    color:black;
+                    width:60px;
+                    cursor:pointer
                     }
                     nav ul {
                         list-style-type: none;
@@ -42,7 +66,7 @@ exports.shopController = (req, res, next) => {
                     li a {
                         text-decoration: none;
                     }
-                    form {
+                    .formel {
                         margin-top: 10px;
                         margin-left: 20%;
                     }
@@ -72,6 +96,6 @@ exports.shopController = (req, res, next) => {
             </body>
             </html>`;
 
-        res.send(html);
-    });
+    res.send(html);
+  });
 };
