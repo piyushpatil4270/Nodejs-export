@@ -11,14 +11,16 @@ const adminRouter=require("./routes/admin")
 const contactRouter=require('./routes/contact')
 const responseRouter=require("./routes/success")
 const prodRouter=require("./routes/product")
+const cartRouter=require("./routes/cart")
 app.use(bodyParser.urlencoded({extended:true}));
 app.use("/",shopRouter)
 app.use("/admin",adminRouter)
 app.use("/contact",contactRouter)
 app.use("/success",responseRouter)
 app.use("/details",prodRouter)
+app.use("/cart",cartRouter)
 
-app.use(errorC.errorController)
+
 
 
 

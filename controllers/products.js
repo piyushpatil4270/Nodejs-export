@@ -17,7 +17,11 @@ exports.getProduct = (req, res, next) => {
             <div class="product-info">
               <p><strong>Price:</strong> ${product.amount}</p>
               <p><strong>Description:</strong> ${product.description}</p>
-            </div>
+              <form action="/cart" method="POST" >
+              <button style="width: 75px; height: 40px; text-decoration: none; border:none; text:20px;  background-color: yellow;" action="Submit" >Add to Cart</button>
+              <input type="hidden" name="productId" value=${product.id}>
+              </form>
+              </div>
           </div>`;
     res.send(htmlstr);
   });
